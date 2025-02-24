@@ -1,1 +1,46 @@
+#include <iostream>
+#include <string>
 
+using namespace std;
+
+void solve() {
+    string s;
+    cin >> s;
+    int intersections = 0;
+    for (char c = 'A'; c <= 'Z'; ++c) {
+        int first = -1, second = -1;
+        for (int i = 0; i < s.length(); ++i) {
+            if (s[i] == c) {
+                if (first == -1) {
+                    first = i;
+                } else {
+                    second = i;
+                    break;
+                }
+            }
+        }
+        for (char other = 'A'; other <= 'Z'; ++other) {
+            if (c == other) continue;
+            int other_first = -1, other_second = -1;
+            for (int i = 0; i < s.length(); ++i) {
+                if (s[i] == other) {
+                    if (other_first == -1) {
+                        other_first = i;
+                    } else {
+                        other_second = i;
+                        break;
+                    }
+                }
+            }
+            if (first < other_first && other_first < second && second < other_second) {
+                intersections++;
+            }
+        }
+    }
+    cout << intersections / 2 << endl;
+}
+
+int main() {
+    solve();
+    return 0;
+}
