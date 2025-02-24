@@ -1,1 +1,42 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
 
+using namespace std;
+
+bool is_increasing(string s) {
+    for (int i = 1; i < s.length(); ++i) {
+        if (s[i] < s[i - 1]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool is_decreasing(string s) {
+    for (int i = 1; i < s.length(); ++i) {
+        if (s[i] > s[i - 1]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void solve() {
+    int t;
+    cin >> t;
+    while (t--) {
+        string s;
+        cin >> s;
+        if (is_increasing(s) || is_decreasing(s)) {
+            cout << "YES" << endl;
+        } else {
+            cout << "NO" << endl;
+        }
+    }
+}
+
+int main() {
+    solve();
+    return 0;
+}
