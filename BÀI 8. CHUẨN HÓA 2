@@ -1,1 +1,56 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <cctype>
 
+using namespace std;
+
+string normalize_name2(string s) {
+    string res = "";
+    string word = "";
+    vector<string> words;
+    for (char c : s) {
+        if (c == ' ') {
+            if (!word.empty()) {
+                words.push_back(word);
+                word = "";
+            }
+        } else {
+            word += c;
+        }
+    }
+    if (!word.empty()) {
+        words.push_back(word);
+    }
+
+    string last_name = words.back();
+    transform(last_name.begin(), last_name.end(), last_name.begin(), ::toupper);
+
+    string first_part = "";
+    for (int i = 0; i < words.size() - 1; ++i) {
+        transform(words[i].begin(), words[i].end(), words[i].begin(), ::tolower);
+        words[i][0] = toupper(words[i][0]);
+        first_part += words[i] + " ";
+    }
+    if (!first_part.empty()) first_part.pop_back();
+
+    return first_part + ", " + last_name;
+}
+
+
+void solve() {
+    int n;
+    cin >> n;
+    cin.ignore();
+    for (int i = 0; i < n; ++i) {
+        string s;
+        getline(cin, s);
+        cout << normalize_name2(s) << endl;
+    }
+}
+
+int main() {
+    solve();
+    return 0;
+}
