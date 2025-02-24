@@ -1,1 +1,46 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <cctype>
 
+using namespace std;
+
+string normalize_name1(string s) {
+    string res = "";
+    string word = "";
+    for (char c : s) {
+        if (c == ' ') {
+            if (!word.empty()) {
+                transform(word.begin(), word.end(), word.begin(), ::tolower);
+                word[0] = toupper(word[0]);
+                res += word + " ";
+                word = "";
+            }
+        } else {
+            word += c;
+        }
+    }
+    if (!word.empty()) {
+        transform(word.begin(), word.end(), word.begin(), ::tolower);
+        word[0] = toupper(word[0]);
+        res += word;
+    }
+    if (!res.empty() && res.back() == ' ') res.pop_back();
+    return res;
+}
+
+void solve() {
+    int n;
+    cin >> n;
+    cin.ignore();
+    for (int i = 0; i < n; ++i) {
+        string s;
+        getline(cin, s);
+        cout << normalize_name1(s) << endl;
+    }
+}
+
+int main() {
+    solve();
+    return 0;
+}
