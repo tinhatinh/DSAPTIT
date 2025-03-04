@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        for (int i = 0; i < n; i++) {
+            cin >> a[i];
+        }
+
+        sort(a.begin(), a.end());
+
+        vector<int> result;
+        int left = 0;
+        int right = n - 1;
+
+        while (left < right) {
+            result.push_back(a[right]);
+            result.push_back(a[left]);
+            right--;
+            left++;
+        }
+
+        if (n % 2 != 0) {
+            result.push_back(a[left]);
+        }
+
+        for (int i = 0; i < n; i++) {
+            cout << result[i] << (i == n - 1 ? "" : " ");
+        }
+        cout << endl;
+    }
+    return 0;
+}
