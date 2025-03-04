@@ -1,0 +1,39 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+void selectionSortAndCountSwaps(int arr[], int n, int& swap_count) {
+    swap_count = 0;
+    for (int i = 0; i < n - 1; ++i) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; ++j) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        if (minIndex != i) {
+            swap(arr[i], arr[minIndex]);
+            swap_count++;
+        }
+    }
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        int a[n];
+        for (int i = 0; i < n; i++) {
+            cin >> a[i];
+        }
+
+        int swap_count;
+        selectionSortAndCountSwaps(a, n, swap_count);
+
+        cout << swap_count << endl;
+    }
+    return 0;
+}
