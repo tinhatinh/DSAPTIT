@@ -1,5 +1,5 @@
 #include <iostream>
-#include <algorithm> // for swap
+#include <algorithm>
 
 using namespace std;
 
@@ -23,14 +23,14 @@ int main() {
     while (t--) {
         int n;
         cin >> n;
-        int a[n]; // Using C-style array as requested
+        int a[n];
         for (int i = 0; i < n; i++) {
             cin >> a[i];
         }
 
         selectionSort(a, n);
 
-        int result[n]; // Result array
+        int result[n];
         int left = 0;
         int right = n - 1;
         int resultIndex = 0;
