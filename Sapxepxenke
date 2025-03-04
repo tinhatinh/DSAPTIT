@@ -1,8 +1,21 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
+#include <algorithm> // for swap
 
 using namespace std;
+
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; ++i) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; ++j) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        if (minIndex != i) {
+            swap(arr[i], arr[minIndex]);
+        }
+    }
+}
 
 int main() {
     int t;
@@ -10,26 +23,27 @@ int main() {
     while (t--) {
         int n;
         cin >> n;
-        vector<int> a(n);
+        int a[n]; // Using C-style array as requested
         for (int i = 0; i < n; i++) {
             cin >> a[i];
         }
 
-        sort(a.begin(), a.end());
+        selectionSort(a, n);
 
-        vector<int> result;
+        int result[n]; // Result array
         int left = 0;
         int right = n - 1;
+        int resultIndex = 0;
 
         while (left < right) {
-            result.push_back(a[right]);
-            result.push_back(a[left]);
+            result[resultIndex++] = a[right];
+            result[resultIndex++] = a[left];
             right--;
             left++;
         }
 
         if (n % 2 != 0) {
-            result.push_back(a[left]);
+            result[resultIndex++] = a[left];
         }
 
         for (int i = 0; i < n; i++) {
